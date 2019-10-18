@@ -2,8 +2,9 @@
 # Created by https://www.gitignore.io/api/visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudio,visualstudiocode
 
-#ignore SecretConfig.cs for SQL-Server
-SecretConfig.cs
+###For secret configuration String to hide from public
+SecretConfiguration.cs
+
 
 ### VisualStudioCode ###
 .vscode/*

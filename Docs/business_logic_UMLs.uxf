@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>40</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>business_logic::Customer
+--
+-custID: long
+-fName: string
+-custlName: string
+-phone: int
+-email: string
+-lastOrder: long
+-ordHist : List&lt;long&gt;
+-favProd : long
+--
+MakeString(): int
+SetFavorite(): void
+
+--
+Responsibilities
+-- document individual customer contact information,
+-- document order history and favorite product.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>0</y>
+      <w>330</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>project::ClassName
+--
+-privateVar: dataType
++publicVar: dataType
+#protectedVar: dataType
+--
++methodName(param: type): returnType
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>1050</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>business_logic::Order
+--
+- orderID: long
+- custID: long
+- totalCost: double
+- currentOrder: Tuple&lt;long, int&gt;
+- orderIsLocked: bool
+
+--
++ updateTotal: void
++ getTodaysDate: void
++ addItemToOrder(): void
++ removeItemFromOrder: void
+
+
+--
+Responsibilities
+-- document order and its features
+-- document changes to an open order.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>700</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>business_logic::Location
+--
+- locID: int
+- locName: string
+- region : int
+- inventory : List&lt;Tuple&lt;long,int&gt; &gt;
+- receiptNums: List&lt; long &gt;
+- mgrID: long
+- isOnFire: bool
+--
++addProduct(): long, int
++remProduct(): long, int
++recieveInv(): long, int
++adjustInv():  long, int
+
+--
+Responsibilities
+-- document location description
+-- document location inventory
+-- update location inventory</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>370</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>business_logic::Product
+--
+- prodID: long
+- productDesc: string
+- salesSBlurb: string
+- cost: double
+- salePrice: double
+- saleValue: double
+
+--
++Profitability(): double
+
+
+
+--
+Responsibilities
+-- document product id and features
+-- document document profitability.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
