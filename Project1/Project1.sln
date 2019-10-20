@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{38D24799-B44A-4481-A6A1-E836BFCEAAFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "data_access", "..\data_access\data_access.csproj", "{7F468368-62FD-4A39-BCEC-FCBD7AE2F3E9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD8581BA-64ED-404F-ACA6-86A7962C1CF2} = {BD8581BA-64ED-404F-ACA6-86A7962C1CF2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -73,6 +73,9 @@ namespace business_logic
                 this.custOrders = value;
             }
         }
+
+        //noargcontructor added for asynch
+        public Customer() { }
         //simple constructor
         public Customer(string first, string last, string phone, string id)
         {
@@ -87,6 +90,7 @@ namespace business_logic
             custOrders = new List<IOrder>();
 
         }
+
 
 
         public string MakeString()
