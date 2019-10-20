@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace business_logic
 {
     //I believe this is the point of intereaction from the data-access to the business logic
-    interface IRepository
+    public interface IRepository
     {
 
         /// <summary>
@@ -17,6 +17,9 @@ namespace business_logic
         /// <returns></returns>
         //threaded version
         Task<IEnumerable<Customer>> GetAllCustomersAsync();
+
+        //for adding customers.
+        //Task AddCustomerAsync(Customer pokemon);
 
 
 

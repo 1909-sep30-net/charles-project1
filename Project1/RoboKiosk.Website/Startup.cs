@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using business_logic;
+using data_access;
 
 namespace RoboKiosk.Website
 {
@@ -26,13 +29,13 @@ namespace RoboKiosk.Website
         public void ConfigureServices(IServiceCollection services)
         {
             ///#### MODIFICATIONS FROM POKEEXAMPLE
-            /*
+            
             // we get the connection string from runtime configuration
-            string connectionString = Configuration.GetConnectionString("PokeDb");
+            string connectionString = Configuration.GetConnectionString("Proj1Db");
 
             // among the services you register for DI (dependency injection)
             // should be your DbContext.
-            services.AddDbContext<PokemonDbContext>(options =>
+            services.AddDbContext<data_access.Entities.caproj0Context>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
@@ -55,7 +58,7 @@ namespace RoboKiosk.Website
             // we have this thing called "dependency injection container" that makes dealing with
             // option #2 easier.
 
-            */
+            
             //below line comes with origioanl build.
             services.AddControllersWithViews();
         }

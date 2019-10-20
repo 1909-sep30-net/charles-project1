@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace data_access
 {
-    class Repository
+    public class Repository : IRepository
     {
         //Verify This////////////////////
         //
@@ -24,7 +24,7 @@ namespace data_access
 
         //get from the table
 
-        business_logic.Order ord= new Order();
+        //business_logic.Order ord= new Order();
 
         /// <summary>
         /// Get all customers asynch
@@ -56,6 +56,31 @@ namespace data_access
             
         }
 
+        /// <summary>
+        /// Add a new customer, asynch-method.
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        /*
+        public async Task AddCustomerAsync(business_logic.Customer customer)
+        {
+            var entity = new Customer
+            {
+                CustID = customer.CustID,
+                FName = customer.FName,
+                LName = customer.LName,
+                PhoneNum = customer.PhoneNum
+            };
 
+            if (await _context.Customer.AnyAsync(c => c.Phone == entity.PhoneNum))
+            {
+                throw new InvalidOperationException("Customer already exists");
+            }
+
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
+
+        }
+        */
     }
 }

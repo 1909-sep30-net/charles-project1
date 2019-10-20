@@ -19,6 +19,11 @@ a:hover
     color:aqua;
 }
 
+table
+{
+    background-color: white;
+}
+
 
 .btn-primary {
   color: #fff;
@@ -70,6 +75,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
   background-color: black;
+
 }
 
 footer {
