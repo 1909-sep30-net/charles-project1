@@ -14,6 +14,8 @@ namespace business_logic
 
         public string CustID { get; set; }
 
+        public int CustNum { get; set; }
+
         public List<IOrder> CustOrders { get; set; }
 
         string MakeString();

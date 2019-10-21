@@ -7,8 +7,23 @@ namespace business_logic
 {
     public class Customer: ICustomer
     {
-        //fields
+        
+        //Holds the customer's password
         private string custID;
+
+        //customer index in the table
+        private int custNum;
+        public int CustNum
+        {
+            get
+            {
+                return this.custNum;
+            }
+            set
+            {
+                this.custNum = value;
+            }
+        }
 
         public string CustID
         {

@@ -1,59 +1,66 @@
 ﻿@model IEnumerable<CustomerViewModel>
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<link href="~/css/site.css" rel="stylesheet" />
 
-<h1>Index</h1>
+<h1>Customer List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">New Customer</a>
+    
 </p>
 
-<table class="table" style="color: white;">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNum)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table" style="background-color: black; color: white; ">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNum)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CustId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CustId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CustId">Delete</a>
-
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustId)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNum)
+                    </td>
+                    <td style="color:black">
+                        @Html.DisplayFor(modelItem => item.CustId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CustNum">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CustNum">Details</a> |
+                        @*<a asp-action="Delete" asp-route-id="@item.CustNum">Delete</a>*@
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 

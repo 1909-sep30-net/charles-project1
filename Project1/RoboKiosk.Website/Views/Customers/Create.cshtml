@@ -1,36 +1,40 @@
-﻿@model data_access.Entities.Customer
+﻿@model RoboKiosk.Website.Models.CustomerViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 style="color:white;">Please Enter the Customer's Information.</h1>
 
-<h4>Customer</h4>
+<h4 style="color:ghostwhite;">Customer</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="color:ghostwhite">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Fname" class="control-label"></label>
-                <input asp-for="Fname" class="form-control" />
-                <span asp-validation-for="Fname" class="text-danger"></span>
+                <label asp-for="LName" class="control-label"></label>
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Lname" class="control-label"></label>
-                <input asp-for="Lname" class="form-control" />
-                <span asp-validation-for="Lname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerPw" class="control-label"></label>
-                <input asp-for="CustomerPw" class="form-control" />
-                <span asp-validation-for="CustomerPw" class="text-danger"></span>
+                <label asp-for="PhoneNum" class="control-label"></label>
+                <input asp-for="PhoneNum" class="form-control" />
+                <span asp-validation-for="PhoneNum" class="text-danger"></span>
+
+                <!-- CustId identifies the customer's password -->
+                <div class="form-group">
+                    <label asp-for="CustId" class="control-label"></label>
+                    <input asp-for="CustId" class="form-control" />
+                    <span asp-validation-for="CustId" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -6,8 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using business_logic;
 using System.Linq;
 
+
+
 namespace data_access
 {
+    /// <summary>
+    /// Access from and writes to the respository
+    /// IRepository acts as a juncture to negotiate with the business_logic classes.
+    /// </summary>
     public class Repository : IRepository
     {
         //Verify This////////////////////
@@ -22,6 +28,8 @@ namespace data_access
             _context = context;
         }
 
+        
+        
         //get from the table
 
         //business_logic.Order ord= new Order();
@@ -45,42 +53,54 @@ namespace data_access
             //re-build the customer object from database-data.
             return entities.Select(e => new business_logic.Customer//(e.Fname, e.Lname, e.Phone, e.CustomerId.ToString() ) );
             {
+                
+                //cust num is it's index on the table in the database
+                CustNum = e.CustomerId,
                 FName = e.Fname,
                 LName = e.Lname,
                 PhoneNum = e.Phone,
 
-                CustID = e.CustomerId.ToString(),
-
+                //customer's password passed to CustID
+                CustID = e.CustomerPw,
+                
 
             }) ;
-            
         }
 
+
+
         /// <summary>
-        /// Add a new customer, asynch-method.
+        /// Add a new customer, asynch-method.  Customers must have a unique phone number and a password (basic security).
+        /// 
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        /*
+        
         public async Task AddCustomerAsync(business_logic.Customer customer)
         {
-            var entity = new Customer
+            var entity = new data_access.Entities.Customer
             {
-                CustID = customer.CustID,
-                FName = customer.FName,
-                LName = customer.LName,
-                PhoneNum = customer.PhoneNum
+                Fname = customer.FName,
+                Lname = customer.LName,
+                Phone = customer.PhoneNum,
+                
+
+                //custID is the password-string
+                CustomerPw = customer.CustID
             };
 
-            if (await _context.Customer.AnyAsync(c => c.Phone == entity.PhoneNum))
+            //check to see if customer is already listed in the database
+            //customers must have a unique phone number
+            if (await _context.Customer.AnyAsync(c => c.Phone == entity.Phone))
             {
-                throw new InvalidOperationException("Customer already exists");
+                throw new InvalidOperationException("Customer already exists, please use a different cell-phone number");
             }
 
             _context.Add(entity);
             await _context.SaveChangesAsync();
 
         }
-        */
+
+
     }
 }

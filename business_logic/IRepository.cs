@@ -19,7 +19,7 @@ namespace business_logic
         Task<IEnumerable<Customer>> GetAllCustomersAsync();
 
         //for adding customers.
-        //Task AddCustomerAsync(Customer pokemon);
+        Task AddCustomerAsync(Customer customer);
 
 
 
