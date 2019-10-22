@@ -10,9 +10,9 @@ namespace business_logic
         public List<Tuple<IProduct, int>> ItemsOrdered { get; set; }
 
         public string OrderID { get; set; }
-        public string Order_TimeStamp { get; }
+        public string Order_TimeStamp { get; set; }
         public void UpdateTotal(Tuple<IProduct, int> goods);
-        public ICustomer Cust { get; }
+        public ICustomer Cust { get; set; }
         public double GetTotal();
         public void GetTodaysDate();
         public void AddItemToOrder(IProduct item , int qty);

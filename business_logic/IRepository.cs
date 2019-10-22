@@ -21,6 +21,11 @@ namespace business_logic
         //for adding customers.
         Task AddCustomerAsync(Customer customer);
 
+        Task<IEnumerable<Order>> GetAllCustOrdersAsync();
+
+        Task AddCustOrderAsync(Order order);
+
+
 
 
 

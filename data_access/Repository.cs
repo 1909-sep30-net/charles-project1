@@ -101,6 +101,53 @@ namespace data_access
 
         }
 
+        /// <summary>
+        /// For Dependancy Injection
+        /// Get all customer orders
+        /// </summary>
+        /// <returns></returns>
+       public async Task<IEnumerable<Order>> GetAllCustOrdersAsync()
+        {
+            List<Entities.CustOrder> orders = await _context.CustOrder.ToListAsync();
+            
+            return orders.Select(o => new business_logic.Order
+            {
+                //cust num is it's index on the table in the database
+                OrderID = o.OrderId.ToString(),
+                Cust = GetCustRecord(_context, o.Customer.Phone),
+                Order_TimeStamp = o.OrderDate.ToString(),
+                OrderLoc = o.Location.Phone,
 
+            });
+        }
+
+        /// <summary>
+        /// Get a customer by phone number
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+         Customer GetCustRecord(Entities.caproj0Context _context, string phone)
+        {
+
+            var customer = _context.Customer.FirstOrDefault(cust => cust.Phone == phone);
+
+            if (customer == null)
+            {
+                Console.WriteLine("Customer not found, please try again or make a new login.");
+                return null;
+            }
+            
+            //                                                            (string first, string last, string phone, string id)
+            business_logic.Customer thisCust = new business_logic.Customer(customer.Fname, customer.Lname, customer.Phone, customer.CustomerPw);
+            thisCust.CustNum = customer.CustomerId;
+            return thisCust;
+
+        }
+
+        public async Task AddCustOrderAsync(business_logic.Order order)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace business_logic
             {
                 return this.cust;
             }
-            private set
+            set
             {
                 this.cust = value;
             }
@@ -66,6 +66,19 @@ namespace business_logic
             {
                 return this.order_timeStamp;
             }
+            set
+
+            {
+                this.order_timeStamp = value;
+            }
+        }
+
+        private string orderLoc;
+
+        public string OrderLoc
+        {
+            get;
+            set;
         }
 
         //lock the order in before check-out

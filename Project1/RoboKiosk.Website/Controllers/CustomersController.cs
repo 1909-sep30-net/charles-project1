@@ -26,7 +26,7 @@ namespace RoboKiosk.Website.Controllers
         
 
 
-        // GET: Customers
+        // GET: Customers for Index display
         public async Task<IActionResult> Index()
         {
             IEnumerable<business_logic.Customer> customer = await _repository.GetAllCustomersAsync();
