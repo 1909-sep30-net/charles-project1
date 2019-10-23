@@ -49,7 +49,7 @@ namespace RoboKiosk.Website.Controllers
         public IActionResult Create()
         {
             ViewData["OrderId"] = new SelectList(_context.CustOrder, "OrderId", "OrderId");
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Pname");
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "SalesName");
             return View();
         }
 

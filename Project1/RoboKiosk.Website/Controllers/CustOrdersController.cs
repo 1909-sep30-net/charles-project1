@@ -25,8 +25,6 @@ namespace RoboKiosk.Website.Controllers
 
             return View(await caproj0Context.ToListAsync());
 
-
-
         }
 
         // GET: CustOrders/Details/5
@@ -52,8 +50,10 @@ namespace RoboKiosk.Website.Controllers
         // GET: CustOrders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerPw");
+            //returns the select list items to display
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "Phone");
             ViewData["LocationId"] = new SelectList(_context.StoreLocation, "LocationId", "Phone");
+
             return View();
         }
 

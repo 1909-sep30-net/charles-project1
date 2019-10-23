@@ -7,34 +7,37 @@
 <h1 style="color:white;">Line Items Per Order Number</h1>
 <h2 style="color:white;">Orders MUST exist before you can edit them.</h2>
 <p>
-    <a asp-action="Create" >Edit An Order</a>
+    <a asp-action="Create">Edit An Order</a>
 </p>
-<table class="table">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Order ID" title="Type In An Order Number" style="color:white">
+<table class="table" id="myTable" style="color: white; ">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order)
+                @Html.DisplayNameFor(model => model.Order) No.
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order.OrderId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Pname)
+                @Html.DisplayFor(modelItem => item.Product.SalesName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.LineItemId">Edit</a> |
@@ -42,6 +45,35 @@
                 <a asp-action="Delete" asp-route-id="@item.LineItemId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+
+<script>
+    function myFunction() {
+
+        var input, filter, table, tr, td, i, txtValue;
+
+        input = document.getElementById("myInput");
+
+        filter = input.value.toUpperCase();
+
+        table = document.getElementById("myTable");
+
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                }
+                else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

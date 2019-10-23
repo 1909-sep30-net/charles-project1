@@ -12,10 +12,13 @@
     <a asp-action="Create">New Customer</a>
     
 </p>
-
-    <table class="table" style="background-color: black; color: white; ">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Phone Here" title="Type in the Customer's Phone" style="color:white">
+    <table class="table" id="myTable" style="background-color: black; color: white; ">
         <thead>
             <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNum)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CustNum)
                 </th>
@@ -24,9 +27,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.LName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneNum)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CustId)
@@ -39,6 +39,9 @@
             {
                 <tr>
                     <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNum)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.CustNum)
                     </td>
                     <td>
@@ -46,9 +49,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNum)
                     </td>
                     <td style="color:black">
                         @Html.DisplayFor(modelItem => item.CustId)
@@ -61,6 +61,35 @@
                     </td>
                 </tr>
             }
+
+            <script>
+                function myFunction() {
+
+                    var input, filter, table, tr, td, i, txtValue;
+
+                    input = document.getElementById("myInput");
+
+                    filter = input.value.toUpperCase();
+
+                    table = document.getElementById("myTable");
+
+                    tr = table.getElementsByTagName("tr");
+
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            }
+                            else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
         </tbody>
     </table>
 
