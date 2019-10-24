@@ -49,10 +49,10 @@ steps:
 
 - script:
       #navigate to correct location
-      cd Project1
+      cd charles-project1/Project1
       dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-  workingDirectory: ./Project1
+  #workingDirectory: ./Project1
 
 # - script: dotnet test
 #   displayName: dotnet test
