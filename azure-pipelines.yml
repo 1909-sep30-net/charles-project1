@@ -1,3 +1,26 @@
+# # ASP.NET Core
+# # Build and test ASP.NET Core projects targeting .NET Core.
+# # Add steps that run tests, create a NuGet package, deploy, and more:
+# # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# trigger:
+# - master
+
+# pool:
+#   vmImage: 'ubuntu-latest'
+
+# variables:
+#   buildConfiguration: 'Release'
+
+# steps:
+# #need to specify the directory to pull the program
+# # three ways bash script to set directory
+# #   
+# - script: 
+#     cd /c/revature/charles-project1/Project1  #use the solution directory
+#     dotnet build --configuration $(buildConfiguration)
+#   displayName: 'dotnet build $(buildConfiguration)'
+
 # ASP.NET Core
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
@@ -13,10 +36,59 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-#need to specify the directory to pull the program
-# three ways bash script to set directory
-#   
-- script: 
-    cd /c/revature/charles-project1/Project1  #use the solution directory
-    dotnet build --configuration $(buildConfiguration)
+# three different ways to solve the initial problem
+
+# - script:
+#     cd RestaurantReviews
+#     dotnet build --configuration $(buildConfiguration)
+#   displayName: 'dotnet build $(buildConfiguration)'
+
+# - script: dotnet build RestaurantReviews --configuration $(buildConfiguration)
+#   displayName: 'dotnet build $(buildConfiguration)'
+
+
+- script:
+      #navigate to correct location
+      cd Project1
+      dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+  workingDirectory: ./Project1
+
+# - script: dotnet test
+#   displayName: dotnet test
+#   workingDirectory: RestaurantReviews
+
+# a task can encapsulate some useful logic so we don't have to
+# write it all out in script step...
+# in this case, this task is both running tests and publishing the results
+# to the build itself
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    projects: './Project1'
+    arguments: '-c $(buildConfiguration) --collect "XPlat Code Coverage"'
+
+- task: PublishCodeCoverageResults@1
+  displayName: Publish code coverage
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish + zip
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: true
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(97e9220f-07ea-4165-af45-97e63b739a72)'
+    appType: 'webApp'
+    WebAppName: 'robostore'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'training'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
