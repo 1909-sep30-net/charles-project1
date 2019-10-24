@@ -13,5 +13,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
+#need to specify the directory to pull the program
+# three ways bash script to set directory
+#   
+- script: 
+    cd /c/revature/charles-project1/Project1  #use the solution directory
+    dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
