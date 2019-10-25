@@ -49,14 +49,8 @@ steps:
 
 - script:
       #navigate to correct location
-      echo "navigating to Project1"
-      pwd
       cd /Project1
-      echo "Where am I now?"
-      pwd
       dotnet build --configuration $(buildConfiguration)
-      echo "Where am I after build--configuration"
-      pwd
   displayName: 'dotnet build $(buildConfiguration)'
   #workingDirectory: ./Project1
 
