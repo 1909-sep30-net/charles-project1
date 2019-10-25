@@ -1,11 +1,24 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace data_access.Entities
 {
     public partial class caproj0Context : DbContext
     {
+        /*//////////////////////////////////////////////
+        //Used to grab the configuration string
+        public caproj0Context(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        */
+        public IConfiguration Configuration { get; }
+        ///  end grab config string///////////
+        
+
+
         public caproj0Context()
         {
         }
@@ -27,10 +40,17 @@ namespace data_access.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(SecretConfiguration.ConnectionString);
+                
+                //Use a string in a local class: does not allow for Pipelining
+                //optionsBuilder.UseSqlServer(SecretConfiguration.ConnectionString);
+
+                //Use this instead.
+                string connectionString = Configuration.GetConnectionString("Proj1Db");
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 

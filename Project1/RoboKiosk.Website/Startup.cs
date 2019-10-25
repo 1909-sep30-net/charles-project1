@@ -29,9 +29,13 @@ namespace RoboKiosk.Website
         public void ConfigureServices(IServiceCollection services)
         {
             ///#### MODIFICATIONS FROM POKEEXAMPLE
-            
+
             // we get the connection string from runtime configuration
+
+            
+
             string connectionString = Configuration.GetConnectionString("Proj1Db");
+            
 
             // among the services you register for DI (dependency injection)
             // should be your DbContext.
