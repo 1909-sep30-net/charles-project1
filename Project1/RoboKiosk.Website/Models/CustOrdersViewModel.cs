@@ -32,18 +32,49 @@ namespace RoboKiosk.Website.Models
         [Required]
         [DisplayName("Order Date")]
 
+        public string OrderDate_Timestamp { get; set; }
+
         public DateTime OrderDate { get; set; }
 
+        public int ProdID { get; set; }
 
-        // in ASP.NET, client-side validation is driven by DataAnnotations attributes like these
-        //   in combination with jquery Validation library, and the tag helpers for input and validation span.
 
-        // server-side validation is driven by the same properties, which are checked during model binding
-        // and erors are put into ModelState. you do have to write the code ot check ModelState.
+        public List<TempSet> TupProdQtyObjList { get; set; }
 
-        //#QUESTION# do I simply iterate over the customers?
-        public List<string> Customers { get; set; }
+        public Dictionary<int, int> TypeQtyDict { get; set; }
 
+        //for Sales Description display purposes only... may be pointless
+        public List<string> Products { get; set; }
+
+        //for labels on form-data, long string name of a product
+        public Dictionary<int, string> ProdCodec { get; set; }
+
+        //product IDs.
+        public List<int> ProdIDs { get; set; }
+
+        //a tuple to get the product's id, short, and then long name.
+        public List<Tuple<int, string, string> > ProdTrippleList {get;set;}
+
+    }
+
+    public class TempSet
+    {
+        public int prodID, qty;
+        public string prodLabel;
+
+        
+        public string prodSales;
+
+        
+        public string ProdSales { get; set; }
+
+        public TempSet(string l, int p, int q, string s)
+        {
+            this.prodLabel = l;
+            this.prodID = p;
+            this.qty = q;
+            this.prodSales = s;
+        }
     }
 }
 

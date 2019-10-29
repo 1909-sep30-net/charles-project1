@@ -1,4 +1,7 @@
-﻿@model IEnumerable<data_access.Entities.CustOrder>
+﻿@model IEnumerable<CustOrdersViewModel>
+
+@*non di*@
+@*@model IEnumerable<data_access.Entities.CustOrder>*@
 
 @{
     ViewData["Title"] = "Index";
@@ -16,18 +19,18 @@
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.Customer)*@
-                Customer @Html.DisplayNameFor(model => model.Customer.Phone)
+                Customer @Html.DisplayNameFor(model => model.CustID)
 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderId)
+                @Html.DisplayNameFor(model => model.OrderID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
+                @Html.DisplayNameFor(model => model.OrderDate_Timestamp)
             </th>
             <th>
                 @*Html.DisplayNameFor(model => model.Location)*@
-                Location @Html.DisplayNameFor(model => model.Location.Phone)
+                Location @Html.DisplayNameFor(model => model.LocationId)
             </th>
             <th></th>
         </tr>
@@ -37,21 +40,21 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.Phone)
+                @Html.DisplayFor(modelItem => item.CustID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
+                @Html.DisplayFor(modelItem => item.OrderID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
+                @Html.DisplayFor(modelItem => item.OrderDate_Timestamp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location.Phone)
+                @Html.DisplayFor(modelItem => item.LocationId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
-                <!--<a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>-->
+                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                <!--<a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>-->
             </td>
         </tr>
             }

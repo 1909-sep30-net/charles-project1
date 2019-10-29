@@ -23,9 +23,15 @@ namespace business_logic
 
         Task<IEnumerable<Order>> GetAllCustOrdersAsync();
 
-        Task AddCustOrderAsync(Order order);
+        Task AddCustOrderAsync(List<Tuple<int, int>> lineItems, string custPh, int storeId);
 
+        public List<string> ProductList();
 
+        public Dictionary<int, string> ProductDictionary();
+
+        public List<int> GetProdIDList();
+
+        public List<Tuple<int, string, string>> GetID_short_longName();
 
 
 

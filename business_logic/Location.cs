@@ -197,7 +197,8 @@ namespace business_logic
         //adjust the quantity of an item in inventory.
         public void AdjustInv(string prod, int qty)
         {
-            IProduct element = inventory.Find(e => e.ProductDesc == prod );
+            IProduct element;
+            element = inventory.Find(e => e.ProductDesc == prod );
 
             element.AdjustQty(qty);
 

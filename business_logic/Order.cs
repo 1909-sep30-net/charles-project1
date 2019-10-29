@@ -99,17 +99,30 @@ namespace business_logic
         }
 
         //a real order
-        public Order(ICustomer cust) // blank constructor
+        public Order(ICustomer cust) // semi blank constructor
         {
             this.orderID = genHexID(); 
             this.totalCost = 0.0;
             this.order_timeStamp = DateTime.Now.ToString(); 
-            this.orderFulfulled = false;
-            this.orderIsLocked = false;
             this.itemsOrdered = new List<Tuple<IProduct, int>>();
             this.qtyAllItems = 0;
             this.Cust = cust;
         }
+
+        public Order(string id, ICustomer cust, string timestamp, string locPh)
+        {
+
+            this.OrderID = id;
+            this.totalCost = 0.0;
+            this.order_timeStamp = timestamp.ToString();
+            this.orderFulfulled = false;
+            this.orderIsLocked = false;
+            this.itemsOrdered = new List<Tuple<IProduct, int>>();
+            this.Cust = cust;
+            this.qtyAllItems = 0;
+            this.OrderLoc = locPh;
+        }
+
 
         public void UpdateTotal( Tuple<IProduct, int> goods)
         {
@@ -138,6 +151,17 @@ namespace business_logic
             //update totals
             this.qtyAllItems += qty;
             UpdateTotal( itemVol );
+        }
+
+        public void AddItemToOrderTuple(Tuple<IProduct,int> itemVol)
+        {
+
+            //add the ordered pair to the order.
+            itemsOrdered.Add(itemVol);
+
+            //update totals
+            this.qtyAllItems += itemVol.Item2;
+            UpdateTotal(itemVol);
         }
 
         public void RemoveItemFromOrder()
