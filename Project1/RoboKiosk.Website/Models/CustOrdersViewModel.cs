@@ -25,7 +25,7 @@ namespace RoboKiosk.Website.Models
         public string CustID { get; set; }
 
         [Required]
-        [DisplayName("Location Number")]
+        [DisplayName("Location Phone Number")]
 
         public string LocationId { get; set; }
 
@@ -34,26 +34,22 @@ namespace RoboKiosk.Website.Models
 
         public string OrderDate_Timestamp { get; set; }
 
-        public DateTime OrderDate { get; set; }
-
-        public int ProdID { get; set; }
-
-
-        public List<TempSet> TupProdQtyObjList { get; set; }
-
-        public Dictionary<int, int> TypeQtyDict { get; set; }
-
-        //for Sales Description display purposes only... may be pointless
-        public List<string> Products { get; set; }
-
-        //for labels on form-data, long string name of a product
-        public Dictionary<int, string> ProdCodec { get; set; }
-
-        //product IDs.
-        public List<int> ProdIDs { get; set; }
-
         //a tuple to get the product's id, short, and then long name.
-        public List<Tuple<int, string, string> > ProdTrippleList {get;set;}
+        public List<Tuple<int, string, string>> ProdTrippleList { get; set; }
+
+        public int Prod1Qty { get; set; }
+
+        public int Prod2Qty { get; set; }
+
+        public int Prod3Qty { get; set; }
+
+        public int Prod4Qty { get; set; }
+
+        public int Prod5Qty { get; set; }
+
+        public int Prod6Qty { get; set; }
+
+        public int Prod7Qty { get; set; }
 
     }
 

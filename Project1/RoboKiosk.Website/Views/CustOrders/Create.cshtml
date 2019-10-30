@@ -2,65 +2,66 @@
 
 @{
     ViewData["Title"] = "Create";
+        
 }
+
+<script>
+    function getQty()
+    {
+
+    }
+
+</script>
 
 <h1>Create A New Order</h1>
 <<h2 style="color:white;">Orders MUST exist before you can edit them.</h2>
 
 <h4 style="color:white;">New Customer Order</h4>
+
 <hr />
-<table class="table">
+<table class="table" style="width:100%;">
+    <tr>
     <td>
-        <td>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="CustID" class="control-label" style="color: white; "></label>
-                <input asp-for="CustID" class="form-control" style="color:black;" />
-                <span asp-validation-for="CustID" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="CustID" class="control-label" style="color: white; "></label>
+                        <input asp-for="CustID" class="form-control" style="color:black;" />
+                        <span asp-validation-for="CustID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LocationId" class="control-label" style="color: white; "></label>
+                        <input asp-for="LocationId" class="form-control" style="color:black;" />
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                    <td>
+                    <p style="color:white;">
+                        @Html.TextBoxFor(model => model.Prod1Qty) x @Html.DisplayFor(m => m.ProdTrippleList[1].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod2Qty) x @Html.DisplayFor(m => m.ProdTrippleList[2].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod3Qty) x @Html.DisplayFor(m => m.ProdTrippleList[3].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod4Qty) x @Html.DisplayFor(m => m.ProdTrippleList[4].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod5Qty) x @Html.DisplayFor(m => m.ProdTrippleList[5].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod6Qty) x @Html.DisplayFor(m => m.ProdTrippleList[6].Item3)<br />
+                        @Html.TextBoxFor(model => model.Prod7Qty) x @Html.DisplayFor(m => m.ProdTrippleList[7].Item3)<br />
+                    </p>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+
+
+
+                </form>
             </div>
+        </div>
+    </tr>
 
-            <div class="form-group">
-                <label asp-for="LocationId" class="control-label" style="color: white; "></label>
-                <input asp-for="LocationId" class="form-control" style="color:black;" />
-                <span asp-validation-for="LocationId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-        <td style="width:60%;">
-            @for (int i = 1; i < 8; i++)
-            {
-            <p>
-                @TempData["HI"]="hello";
-                <span class="form-group">
-                    @*@{ List<TempSet> TypProdQtyObList = (List<TempSet>)TempData["TupProdQtyObjList"]; TempData.Keep(); }*@
-
-                    <intput type="number" value=@TempData[Model.ProdTrippleList[i].Item2] min="0" />
-                    
-                    @*<input type="number" asp-for=@Model.TupProdQtyObjList[i].qty min="0" style="color:black">*@
-
-                    @Html.TextBoxFor(m => m.TupProdQtyObjList[i], new { type = "number", min = "0", step = "1" })
-                    
-                    @*@Html.EditorFor(m => TypProdQtyObList[i].qty);*@
-                    
-                    @Html.DisplayFor(m => m.ProdTrippleList[i].Item3)
-                </span>
-                
-            </p>
-            }
-        </td>
-</tr>
-
-    </table>
+</table>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

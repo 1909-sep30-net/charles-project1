@@ -98,23 +98,6 @@ namespace RoboKiosk.Website.Controllers
             
             viewModel.ProdTrippleList = _repository.GetID_short_longName();
             
-            //declare the list
-            viewModel.TupProdQtyObjList = new List<TempSet>();
-
-            //add a list to store the form-field's name and get the quanity.
-            for(int i = 0; i < viewModel.ProdTrippleList.Count; i++)
-            {
-                //sets an ordered pair, product-id and quantity.
-                TempSet thisSet = new TempSet(viewModel.ProdTrippleList[i].Item2, viewModel.ProdTrippleList[i].Item1, 0, viewModel.ProdTrippleList[i].Item3);
-
-                //dump the labels into temp-data and assign each 0 (for a quantity)
-                TempData[viewModel.ProdTrippleList[i].Item2] = 0;
-
-                //adds it to the view-model.
-                viewModel.TupProdQtyObjList.Add(thisSet);
-            }
-
-            
 
             //place the reference
             //TempData["TupProdQtyObjList"] = viewModel.TupProdQtyObjList;
@@ -134,62 +117,27 @@ namespace RoboKiosk.Website.Controllers
         public async Task<IActionResult> Create(CustOrdersViewModel viewModel)
         {
             //recreate the reference.
-            viewModel.ProdTrippleList = _repository.GetID_short_longName();
-            //var whatIsThis = ViewBag["test"];
-
-            //get the data
-            //viewModel.TupProdQtyObjList = (List<TempSet>)TempData["TupProdQtyObjList"];
-
-            //non-destructive method
-            //viewModel.TupProdQtyObjList = (List<TempSet>)TempData.Peek("TupProdQtyObjList");
-
-
-
-            /*
-            if (ModelState.IsValid)
-            {
-                _context.Add(custOrder);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            */
-
+            var trippleList = _repository.GetID_short_longName();
 
             ///////////build the list of line items///////////////////////
-            List <Tuple<int, int>> lineitemList = new List<Tuple<int, int>>();
 
-            for (int i = 0; i < viewModel.ProdTrippleList.Count; i++)
+            List<Tuple<int, int>> lineItms = new List<Tuple<int, int>>()
             {
-                string shortN = viewModel.ProdTrippleList[i].Item2;
-                
-                int pid = viewModel.ProdTrippleList[i].Item1;
-                
-                int qty = int.Parse(TempData[shortN].ToString());
-                
-                Tuple<int, int> LineItem = Tuple.Create(pid, qty);
-                
-                lineitemList.Add(LineItem);
-            }
-            ///////////////////////////////////////////////////////////////
-
-
-
-            //////////////////// just to see if the back-end is even working//////////////////
-            //dummy objects : they do work
-
-            List<Tuple<int, int>> dummyList = new List<Tuple<int, int>>();
-
-            //dummy tuple
-            //note, products on the server really start at 2, as 1 = none.
-            Tuple<int, int> dummyLineItem = Tuple.Create(2, 1);
-
-            //self explanitory
-            dummyList.Add(dummyLineItem);
-
-            //don't do anything till other code works!!!!!!!!!!!!
-            await _repository.AddCustOrderAsync(dummyList, "5551234567", 1);
+                getPair( trippleList[1].Item1, viewModel.Prod1Qty),
+                getPair( trippleList[2].Item1, viewModel.Prod2Qty),
+                getPair( trippleList[3].Item1, viewModel.Prod3Qty),
+                getPair( trippleList[4].Item1, viewModel.Prod4Qty),
+                getPair( trippleList[5].Item1, viewModel.Prod5Qty),
+                getPair( trippleList[6].Item1, viewModel.Prod6Qty),
+                getPair( trippleList[7].Item1, viewModel.Prod7Qty)
+            };
 
             ////////////////////////////////////////////////////////////////////////////////
+
+            //update the database
+            await _repository.AddCustOrderAsync(lineItms, viewModel.CustID, viewModel.LocationId );
+
+            
 
 
 
@@ -198,6 +146,11 @@ namespace RoboKiosk.Website.Controllers
             //ViewData["LocationId"] = new SelectList(_context.StoreLocation, "LocationId", "Phone", custOrder.LocationId);
 
             return View(viewModel);
+        }
+
+        public Tuple<int,int> getPair(int a, int b)
+        {
+            return new Tuple<int, int>(a, b);
         }
 
         /*

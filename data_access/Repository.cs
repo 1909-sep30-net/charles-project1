@@ -250,12 +250,12 @@ namespace data_access
         /// <param name="cust"></param>
         /// <param name="store"></param>
         /// <returns></returns>
-        public async Task AddCustOrderAsync(List<Tuple<int, int>> lineItems, string custPh, int storeId)
+        public async Task AddCustOrderAsync(List<Tuple<int, int>> lineItems, string custPh, string storePh)
         {
             
-
+            var storeID = _context.StoreLocation.FirstOrDefault(s => s.Phone == storePh);
             //create a store object and get it's inventory from the database.
-            ILocation store = InitStoreLocation(storeId);
+            ILocation store = InitStoreLocation(storeID.LocationId);
 
             //create a customer object
             ICustomer cust = CreateCustObj(custPh);
